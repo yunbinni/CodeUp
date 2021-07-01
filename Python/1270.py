@@ -1,0 +1,1 @@
+print(len([i for i in range(1, int(input()) + 1) if i%10==1]))
