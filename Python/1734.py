@@ -1,0 +1,1 @@
+print("welcome! %s" % input())
