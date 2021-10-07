@@ -1,9 +1,8 @@
 #include <stdio.h>
 
-main() {
-	int i, hap = 0;
-	for(i = 1; i <= 10; i++)
-		hap += i;
-	
-	printf("%d %d", i, hap);
+int main()
+{
+	bool a = true;
+	printf("%d", a);
+	return 0;
 }
