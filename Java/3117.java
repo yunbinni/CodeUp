@@ -19,15 +19,12 @@ public class Main {
             if(input != 0)
                 stack.push(input);
 
-            // 입력받은 값이 0면 Pop
+                // 입력받은 값이 0면 Pop
             else
                 stack.pop();
         }
 
         // 출력부
-        while(!stack.empty())
-            sum += stack.pop();
-
-        System.out.println(sum);
+        System.out.println(stack.stream().reduce(0, Integer::sum));
     }
 }
