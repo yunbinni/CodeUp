@@ -1,42 +1,56 @@
-/* 배열리스트 기반 풀이 */
+/* 연결리스트 기반 풀이 */
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
-/* 스택 정의 */ 
+/* 스택에 들어갈 단위인 노드 정의 */
+typedef struct _node
+{
+	int data;
+	struct _node* next;
+} Node;
+
+/* 스택 정의(연결리스트 기반) */
 typedef struct _stack
 {
-	int stackArr[100001];
-	int topIndex;
+	Node* head;
 } Stack;
 
 /* 스택 관련 함수 */ 
 void Init(Stack* pstack) {
-	pstack->topIndex = -1;
+	pstack->head = NULL;
 }
 
 bool IsEmpty(Stack* pstack) {
-	if(pstack->topIndex == -1)
+	if(pstack->head == NULL)
 		return true;
 	else
 		return false;
 }
 
 void Push(Stack* pstack, int data) {
-	pstack->topIndex += 1;
-	pstack->stackArr[pstack->topIndex] = data;
+	Node* newNode = (Node*)malloc(sizeof(Node));
+	newNode->data = data;
+	
+	newNode->next = pstack->head;
+	pstack->head = newNode;
 }
 
 int Pop(Stack* pstack) {
-	int rIdx = pstack->topIndex;
-	pstack->topIndex -= 1;
-	return pstack->stackArr[rIdx];
+	if(IsEmpty(pstack))
+		exit(-1);
+	
+	int rdata = pstack->head->data;
+	Node* rNode = pstack->head;
+	
+	pstack->head = pstack->head->next;
+	
+	free(rNode);
+	
+	return rdata;
 }
 
-int Peek(Stack* pstack) {
-	return pstack->stackArr[pstack->topIndex];
-}
-
-/* 메인 함수 */
+/*  메인 함수 */
 int main(void)
 {
 	// 입력 및 초기화
@@ -64,6 +78,4 @@ int main(void)
 	while(!IsEmpty(&stack))
 		sum += Pop(&stack);
 	printf("%d", sum);
-	
-	return 0;
 }
